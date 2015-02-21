@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>健作くん</title>
+</head>
+<body>
+<h1>健作くん</h1>
+必要なところに入力して検索。最大100件まで表示。<br>
+データソースは<a href="https://xato.net/passwords/ten-million-passwords/">ここ</a>で配布されているものになります。<br>
+飽きたら公開を停止するのでお早めにご利用ください。<br>
+<form method="get" action="/">
+<p>
+ID：<input type="text" name="id" size="20">
+</p>
+<p>
+PASS：<input type="text" name="pass" size="40">
+</p>
+<p>
+<input type="submit" value="検索">
+</p>
+</form>
+{{.Msg}}<br>
+{{if ne .Hit 0}}
+{{.Hit}}件見つかりました。<br>
+<table>
+<thead>
+	<tr>
+		<th>行番号</th>
+		<th>ID</th>
+		<th>PASS</th>
+	</tr>
+</thead>
+<tbody>
+{{range $index, $it := .Items}}
+<tr>
+	<td>{{$it.Uid}}</td>
+	<td>{{$it.Id}}</td>
+	<td>{{$it.Pass}}</td>
+</tr>
+{{end}}
+</tbody>
+</table>
+{{end}}
+</body>
+</html>
